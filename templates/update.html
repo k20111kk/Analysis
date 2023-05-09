@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<div class="container">
+<h1>編集画面</h1>
+    <form method="POST">
+        <div class="iframe-wrapper"></div>
+        <div id="player"></div>
+        <!-- jsの読み込み -->
+        <script src="static/js/script.js"></script>
+        <br><br>
+        <br><br>
+        <label for="title">ジャンル</label>
+        <input type="text" name="title" value={{ post.title }}>
+        <label for="body">内容</label>
+        <input type="text" name="body" value={{ post.body }}>
+        <label for="start">開始時刻</label>
+        <input type="time" name="start" step="1" type="Time"  value={{ post.start }}>
+        <label for="end">終了時刻</label>
+        <input type="time" name="end" step=1 type="Time" value={{ post.end }}>
+        <input type="submit" value="更新">
+        <input type="button" onclick="location.href='/'" value="TOP画面へ戻る">
+
+    </form>
+</div>
+{% endblock %}
+

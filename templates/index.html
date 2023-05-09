@@ -1,0 +1,63 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}TOPページ{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>動画タグ付けアプリ</h1>
+    <div class="iframe-wrapper"></div>
+    <div id="player"></div>
+    <!-- jsの読み込み -->
+    <script src="static/js/script.js"></script>
+    <br><br>
+    {% for post in posts %}
+    <table class="table table-striped" id="{{ post.id }}">
+        <thead>
+            <tr>
+              <th scope="col">ジャンル</th>
+              <th scope="col">内容</th>
+              <th scope="col">開始時刻</th>
+              <th scope="col">終了時刻</th>
+            </tr>
+            <tbody>
+                <tr>
+                    <td>{{post.title}}</td>
+                    <td>{{post.body}}</td>
+                    <td>{{post.start}}</td>
+                    <td>{{post.end}}</td>
+                    <td><input type="button" onclick="Click_Sub(this);" class="play_video" id="btn-{{ post.id }}" value="再生"></td>
+                    <td><input type="button" class="btn btn-primary" onclick="location.href='/{{post.id}}/update'" value="編集"></td>             
+                    <td><input type="button" class="btn btn-primary" onclick="location.href='/{{post.id}}/delete'" value="削除"></td>             
+                    <td><input type="button" class="btn btn-primary" onclick="location.href='/{{post.id}}/save'" value="保存"></td>             
+                </tr>
+            </tbody>
+        </thead>
+    </table>
+    <table class="table table-striped" id="{{ post.start }}">
+        <p id="p_{{ post.id }}">開始時刻：{{ post.start }}</p>
+    </table>
+    {% endfor %}
+    
+    <input type="button" class="btn btn-primary" onclick="location.href='/create'" value="新規作成">
+    <input type="button" class="btn btn-secondary" onclick="location.href='/logout'" value="ログアウト">    
+    <br><br>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function Click_Sub(obj){
+            btn_id = obj.id;
+            console.log(btn_id);
+            id = btn_id.slice(4);
+            time_tmp = $('#p_' + id).text();
+            time = time_tmp.slice(5);
+            seconds = calculation(time);
+            mySeekTo(seconds);
+            playVideo();
+        }
+
+        function calculation(time){
+            seconds = parseInt(time.slice(0, 2)) * 3600 + parseInt(time.slice(3, 5)) * 60 + parseInt(time.slice(6, 8));
+            return seconds;
+        }
+    </script>
+</div>
+{% endblock %}

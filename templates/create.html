@@ -1,0 +1,24 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<div class="container">
+<h1>新規作成画面</h1>
+    <form method="POST">
+        <div class="iframe-wrapper"></div>
+        <div id="player"></div>
+        <!-- jsの読み込み -->
+        <script src="static/js/script.js"></script>
+        <br><br>
+        <br><br>
+        <label for="title" class="form-label" >ジャンル</label>
+        <input type="text" name="title" class="form-control">
+        <label for="body" class="form-label">内容</label>
+        <input type="text" name="body" class="form-control">
+        <label for="start" class="form-label">開始時刻</label>
+        <input type="time" name="start" step="1" type="Time" value="00:00:00">
+        <label for="end" class="form-label">終了時刻</label>
+        <input type="time" name="end" step=1 type="Time" value="00:00:00">
+        <input type="submit"  class="btn btn-primary" value="登録" class="form-control">
+        <input type="button"  class="btn btn-primary" onclick="location.href='/'" value="TOP画面へ戻る" class="form-control">
+    </form>
+</div>
+{% endblock %}
